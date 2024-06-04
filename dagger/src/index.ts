@@ -2,10 +2,8 @@ import {
   dag,
   File,
   Directory,
-  Secret,
   object,
   func,
-  ClientContainerOpts,
 } from "@dagger.io/dagger"
 
 

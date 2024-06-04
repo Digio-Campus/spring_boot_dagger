@@ -8,3 +8,15 @@ y ejecutar un fichero .jar con Dagger Engine sobre un proyecto Java con Spring B
 5. En el método main de Application ponemos un "System.out.println("Hello World!");" para probar que se ejecuta correctamente.
 6. Después ejecutamos "dagger call build --source=. export --path=./target/spring_boot_dagger-0.0.1-SNAPSHOT.jar". Este comando primero creará una imagen con el código que haya en el directorio que hemos pasado como parámetro "source" y después exportará el fichero .jar en el directorio que hemos pasado como parámetro "path".
 7. Finalmente ejecutamos el fichero .jar con "java -jar ./target/spring_boot_dagger-0.0.1-SNAPSHOT.jar" y deberíamos ver por consola el mensaje "Hello World!".
+
+
+# Modificación para utilizar Bun.js en lugar de Node.js
+
+Para saber qué runtime utilizar Dagger mira en el campo dagger.runtime del fichero package.json del módulo dagger.
+En caso de no estar indicado lo infiere de los ficheros lock. En caso de no encontrar ninguno, utiliza Node.js por defecto.
+
+1. Para utilizar Bun.js debemos añadir en package.json del módulo dagger: "dagger": { "runtime": "bun" }. 
+2. Después debemos borrar el fichero package-lock.json y node_modules.
+3. Ejecutamos "bun install" para instalar las dependencias.
+4. Ahora en el directorio raíz podemos volver a ejecutar "dagger call build --source=. export --path=./target/spring_boot_dagger-0.0.1-SNAPSHOT.jar" y se volverá a generar un fichero binario .jar pero esta vez con Bun.js.
+5. Si queremos volver a cambiar a Node.js será tan sencillo como cambiar el campo dagger.runtime de package.json a "node", borrar bun.lockb y node_modules y ejecutar "npm install" para instalar las dependencias.
